@@ -15,6 +15,7 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
         crossorigin="anonymous"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 </head>
@@ -100,18 +101,30 @@
 
         cpf.request('["digitalWrite", 2 , 1]'); //開始就有磁力
        });
-        $("#1226").text(x);  //方便測試
+        
         
         $("td").click(function(){
             if($(this).text()==x){
                 $(this).text("hit");
                 $(this).addClass("hit");
-                setTimeout(function(){ var r = confirm("恭喜！回合結束");
-                //雲教授執行CODE
-               // cpf.set("socket d2",0);
-                if (r == true) {
-                    window.location.reload();           } 
-            }, 200);
+		cpf.request('["digitalWrite", 2 , 0]');
+                swal({
+                title: "恭喜！回合結束",
+                text: "在玩一次？",
+                icon: "success",
+                buttons: true,
+                dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        swal("回合重新開始", {
+                        buttons: false,
+                        });
+                        setTimeout(function(){ window.location.reload(); } , 800);
+                    } else {
+                    swal("祝您有個愉快的假期！");
+                    }
+                });
                  
             }else{
                 $(this).text("miss");
