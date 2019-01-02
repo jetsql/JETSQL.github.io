@@ -84,7 +84,7 @@
         var x =Math.floor(Math.random() * 18)+1;
         var electromagnet;
  //雲教授啟動
-        setup();
+           setup();
 	     function loop() {
 		    if(cpf){
               cpf.request('["digitalWrite", 2 , 1]');
@@ -131,18 +131,18 @@
 		if(cpf)
             cpf.setPinMode('["resetPin"],["setPinMode", "digital", 2, "OUTPUT"]'); 
 	    }
-/*function setelectromagnet(){
+function setelectromagnet(){
  electromagnet = cpf.get("socket d2");//接收sensor數值
  ui.set("socket d2", electromagnet);//顯示狀態
  return electromagnet;
  }
 
 function goelectromagnet(){ //啟動
-    Electromagnet=ui.get("socket d2");
+    electromagnet=ui.get("socket d2");
     cpf.set("socket d2", Electromagnet);
     cpf.repeat();
  }
- */
+ 
     </script>
 
 
