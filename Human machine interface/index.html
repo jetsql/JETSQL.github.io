@@ -86,16 +86,20 @@
     <script>
         var x =Math.floor(Math.random() * 25)+1;
         var electromagnet;
+ //雲教授啟動
+        setup();
+	     function loop() {
+		    if(cpf){
+              cpf.request('["digitalWrite", 2 , 1]');
+		    }
+		 setTimeout(loop, 1000);
+	     }
+	    loop();
 
-        /*
-        window.onload=function(){
-            goelectromagnet(); //開始就有磁力
-        };
-       */
        $(document).ready(function(){
-       // goelectromagnet(); //開始就有磁力
-       });
 
+        cpf.request('["digitalWrite", 2 , 1]'); //開始就有磁力
+       });
         $("#1226").text(x);  //方便測試
         
         $("td").click(function(){
@@ -114,6 +118,10 @@
                 $(this).addClass("miss");
             }
   });
+ function setup(){
+		if(cpf)
+            cpf.setPinMode('["resetPin"],["setPinMode", "digital", 2, "OUTPUT"]'); 
+	    }
 /*function setelectromagnet(){
  electromagnet = cpf.get("socket d2");//接收sensor數值
  ui.set("socket d2", electromagnet);//顯示狀態
